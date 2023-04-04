@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "sls deploy",
-    "start": "npx sls invoke local -f getProductsList --path src/functions/getProductsList/mock-event.json"
+    "start": "npx sls invoke local -f getProductsById --path src/functions/getProductsById/mock-event.json"
   },
   "engines": {
     "node": ">=14.15.0"

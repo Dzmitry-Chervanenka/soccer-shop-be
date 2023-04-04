@@ -1,7 +1,7 @@
 import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/api-gateway';
 import { formatJSONResponse } from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
-import products from "@functions/getProductsList/mock-db";
+import products from "@functions/mock-db";
 
 
 const getProductsList: ValidatedEventAPIGatewayProxyEvent<null> = async () => {
