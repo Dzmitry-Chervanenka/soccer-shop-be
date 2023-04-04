@@ -1,0 +1,24 @@
+{
+  "name": "soccer-shop-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "serverless": "^3.29.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy" : "sls deploy",
+    "create" : "sls create --template aws-nodejs-typescript --path"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dzmitry-Chervanenka/soccer-shop-be.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dzmitry-Chervanenka/soccer-shop-be/issues"
+  },
+  "homepage": "https://github.com/Dzmitry-Chervanenka/soccer-shop-be#readme"
+}
