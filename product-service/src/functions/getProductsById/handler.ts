@@ -4,9 +4,8 @@ import { middyfy } from '@libs/lambda';
 import products from "@functions/mock-db";
 
 
-const getProductsList: ValidatedEventAPIGatewayProxyEvent<null> = async (event) => {
-    const id = event.pathParameters.productId;
-    const product = products.find(p=> p.id === id);
+const getProductsList: ValidatedEventAPIGatewayProxyEvent<null> = async ({pathParameters: {productId}}) => {
+    const product = products.find(p=> p.id === productId);
     if(!product){
         return formatJSONResponse(null, {status: 404, message: 'Not Found'})
     }
