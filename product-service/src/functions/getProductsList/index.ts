@@ -6,7 +6,10 @@ export default {
         {
             http: {
                 method: 'get',
-                path: 'products/available',
+                path: 'product/available',
+                cors: {
+                    origin: '*'
+                }
             },
         },
     ],

@@ -5,7 +5,7 @@
   "main": "serverless.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy" : "sls deploy",
+    "deploy": "sls deploy",
     "start": "npx sls invoke local -f getProductsList --path src/functions/getProductsList/mock-event.json"
   },
   "engines": {
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@middy/core": "^3.4.0",
+    "@middy/http-cors": "^4.2.8",
     "@middy/http-json-body-parser": "^3.4.0"
   },
   "devDependencies": {

@@ -4,10 +4,8 @@ import { middyfy } from '@libs/lambda';
 import products from "@functions/getProductsList/mock-db";
 
 
-const hello: ValidatedEventAPIGatewayProxyEvent<null> = async () => {
-    return formatJSONResponse({
-        products
-    });
+const getProductsList: ValidatedEventAPIGatewayProxyEvent<null> = async () => {
+    return formatJSONResponse(products);
 };
 
-export const main = middyfy(hello);
+export const main = middyfy(getProductsList);
