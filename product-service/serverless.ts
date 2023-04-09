@@ -1,5 +1,4 @@
 import type { AWS } from '@serverless/typescript';
-import hello from "@functions/hello";
 import getProductsList from "@functions/getProductsList";
 import getProductsById from "@functions/getProductsById";
 
@@ -22,7 +21,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { hello, getProductsList, getProductsById },
+  functions: { getProductsList, getProductsById },
   package: { individually: true },
   custom: {
     esbuild: {
@@ -36,6 +35,41 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
     },
   },
+  resources: {
+    Resources: {
+      products: {
+        Type: 'AWS::DynamoDB::Table',
+        Properties: {
+          TableName : "products",
+          KeySchema: [
+            {
+              AttributeName: "id",
+              KeyType: "HASH", //Partition key
+            },
+            {
+              AttributeName: "title",
+              KeyType: "RANGE" //Sort key
+            },
+          ],
+          AttributeDefinitions: [
+            {
+              AttributeName: "id",
+              AttributeType: "N"
+            },
+            {
+              AttributeName: "title",
+              AttributeType: "S"
+            },
+          ],
+
+          ProvisionedThroughput: {       // Only specified if using provisioned mode
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1
+          }
+        }
+      }
+    }
+  }
 };
 
 module.exports = serverlessConfiguration;
