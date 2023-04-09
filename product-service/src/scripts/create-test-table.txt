@@ -1,0 +1,12 @@
+aws dynamodb create-table \
+		--region eu-north-1 \
+    --table-name products \
+    --attribute-definitions \
+        AttributeName=id,AttributeType=N \
+        AttributeName=title,AttributeType=S \
+    --key-schema \
+        AttributeName=id,KeyType=HASH \
+        AttributeName=title,KeyType=RANGE \
+    --provisioned-throughput \
+        ReadCapacityUnits=1,WriteCapacityUnits=1 \
+    --table-class STANDARD
