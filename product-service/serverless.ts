@@ -20,12 +20,12 @@ const serverlessConfiguration: AWS = {
         statements: [
           {
             Effect: "Allow",
-            Action: ["dynamodb:Scan", "dynamodb:UpdateItem"],
+            Action: ["dynamodb:Scan", "dynamodb:UpdateItem", "dynamodb:GetItem"],
             Resource: "arn:aws:dynamodb:eu-north-1:034402733310:table/products",
           },
           {
             Effect: "Allow",
-            Action: ["dynamodb:Scan", "dynamodb:UpdateItem"],
+            Action: ["dynamodb:Scan", "dynamodb:UpdateItem", "dynamodb:GetItem"],
             Resource: "arn:aws:dynamodb:eu-north-1:034402733310:table/stocks",
           }
         ]
