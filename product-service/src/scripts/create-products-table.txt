@@ -2,7 +2,7 @@ aws dynamodb create-table \
 		--region eu-north-1 \
     --table-name products \
     --attribute-definitions \
-        AttributeName=id,AttributeType=N \
+        AttributeName=id,AttributeType=S \
         AttributeName=title,AttributeType=S \
     --key-schema \
         AttributeName=id,KeyType=HASH \

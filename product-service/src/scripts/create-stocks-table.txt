@@ -1,0 +1,12 @@
+aws dynamodb create-table \
+		--region eu-north-1 \
+    --table-name stocks \
+    --attribute-definitions \
+        AttributeName=product_id,AttributeType=S \
+        AttributeName=count,AttributeType=N \
+    --key-schema \
+        AttributeName=product_id,KeyType=HASH \
+        AttributeName=count,KeyType=RANGE \
+    --provisioned-throughput \
+        ReadCapacityUnits=1,WriteCapacityUnits=1 \
+    --table-class STANDARD

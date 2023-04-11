@@ -7,8 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "sls deploy",
     "start": "npx sls invoke local -f getProductsById --path src/functions/getProductsById/mock-event.json",
-    "create-products-table": "bash src/scripts/create-test-table.txt",
-    "check-products-table": "bash src/scripts/describe-test-table.txt"
+    "create-products-table": "bash src/scripts/create-products-table.txt",
+    "check-products-table": "bash src/scripts/describe-products-table.txt",
+    "create-stocks-table": "bash src/scripts/create-stocks-table.txt",
+    "check-stocks-table": "bash src/scripts/describe-stocks-table.txt",
+    "fill-products-table": "bash src/scripts/fill-products-table.txt",
+    "fill-stocks-table": "bash src/scripts/fill-stocks-table.txt"
   },
   "engines": {
     "node": ">=14.15.0"
