@@ -9,18 +9,35 @@ const serverlessConfiguration: AWS = {
   plugins: ['serverless-esbuild'],
   provider: {
     name: 'aws',
-    runtime: 'nodejs14.x',
+    runtime: 'nodejs16.x',
     region: "eu-north-1",
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
     },
+    iam: {
+      role: {
+        statements: [
+          {
+            Effect: "Allow",
+            Action: ["dynamodb:Scan", "dynamodb:UpdateItem"],
+            Resource: "arn:aws:dynamodb:eu-north-1:034402733310:table/products",
+          },
+          {
+            Effect: "Allow",
+            Action: ["dynamodb:Scan", "dynamodb:UpdateItem"],
+            Resource: "arn:aws:dynamodb:eu-north-1:034402733310:table/stocks",
+          }
+        ]
+      }
+    },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      PRODUCTS_TABLE_NAME: 'products',
+      STOCKS_TABLE_NAME: 'stocks'
     },
   },
-  // import the function via paths
   functions: { getProductsList, getProductsById },
   package: { individually: true },
   custom: {
@@ -29,47 +46,12 @@ const serverlessConfiguration: AWS = {
       minify: false,
       sourcemap: true,
       exclude: ['aws-sdk'],
-      target: 'node14',
+      target: 'node16',
       define: { 'require.resolve': undefined },
       platform: 'node',
       concurrency: 10,
     },
   },
-  resources: {
-    Resources: {
-      products: {
-        Type: 'AWS::DynamoDB::Table',
-        Properties: {
-          TableName : "products",
-          KeySchema: [
-            {
-              AttributeName: "id",
-              KeyType: "HASH", //Partition key
-            },
-            {
-              AttributeName: "title",
-              KeyType: "RANGE" //Sort key
-            },
-          ],
-          AttributeDefinitions: [
-            {
-              AttributeName: "id",
-              AttributeType: "N"
-            },
-            {
-              AttributeName: "title",
-              AttributeType: "S"
-            },
-          ],
-
-          ProvisionedThroughput: {       // Only specified if using provisioned mode
-            ReadCapacityUnits: 1,
-            WriteCapacityUnits: 1
-          }
-        }
-      }
-    }
-  }
 };
 
 module.exports = serverlessConfiguration;
