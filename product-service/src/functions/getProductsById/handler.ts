@@ -19,14 +19,12 @@ const getProductById: ValidatedEventAPIGatewayProxyEvent<null> = async ({pathPar
     };
     const client = new DynamoDBClient({});
 
-    console.log(client)
-    const products:GetItemCommandOutput = await client.send(new GetItemCommand(params));
+    const product:GetItemCommandOutput = await client.send(new GetItemCommand(params));
 
-    console.log(products)
-    if(!products.Item){
+    if(!product.Item){
         return formatJSONResponse(null, {status: 404, message: 'Not Found'})
     }
-    return formatJSONResponse({product: fromProductDao(products.Item)});
+    return formatJSONResponse({product: fromProductDao(product.Item)});
 };
 
 export const main = middyfy(getProductById);

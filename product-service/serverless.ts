@@ -1,6 +1,7 @@
 import type { AWS } from '@serverless/typescript';
 import getProductsList from "@functions/getProductsList";
 import getProductsById from "@functions/getProductsById";
+import createProduct from "@functions/createProduct";
 
 
 const serverlessConfiguration: AWS = {
@@ -20,12 +21,12 @@ const serverlessConfiguration: AWS = {
         statements: [
           {
             Effect: "Allow",
-            Action: ["dynamodb:Scan", "dynamodb:UpdateItem", "dynamodb:GetItem"],
+            Action: ["dynamodb:Scan", "dynamodb:UpdateItem", "dynamodb:GetItem", "dynamodb:PutItem"],
             Resource: "arn:aws:dynamodb:eu-north-1:034402733310:table/products",
           },
           {
             Effect: "Allow",
-            Action: ["dynamodb:Scan", "dynamodb:UpdateItem", "dynamodb:GetItem"],
+            Action: ["dynamodb:Scan", "dynamodb:UpdateItem", "dynamodb:GetItem", "dynamodb:PutItem"],
             Resource: "arn:aws:dynamodb:eu-north-1:034402733310:table/stocks",
           }
         ]
@@ -38,7 +39,7 @@ const serverlessConfiguration: AWS = {
       STOCKS_TABLE_NAME: 'stocks'
     },
   },
-  functions: { getProductsList, getProductsById },
+  functions: { getProductsList, getProductsById, createProduct },
   package: { individually: true },
   custom: {
     esbuild: {
