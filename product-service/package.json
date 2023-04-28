@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "sls deploy",
-    "start": "npx sls invoke local -f createProduct --path src/functions/createProduct/mock-event.json",
+    "start": "npx sls invoke local -f getThumbnails --path src/functions/getThumbnails/mock-event.json",
     "create-products-table": "bash src/scripts/create-products-table.txt",
     "check-products-table": "bash src/scripts/describe-products-table.txt",
     "create-stocks-table": "bash src/scripts/create-stocks-table.txt",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.310.0",
+    "@aws-sdk/client-s3": "^3.315.0",
     "@middy/core": "^3.4.0",
     "@middy/http-cors": "^4.2.8",
     "@middy/http-json-body-parser": "^3.4.0",
