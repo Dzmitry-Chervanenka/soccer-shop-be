@@ -1,0 +1,1 @@
+ aws dynamodb describe-table --table-name products | grep TableStatus

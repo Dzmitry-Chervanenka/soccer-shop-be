@@ -1,7 +1,7 @@
-import hello from './hello';
 import getProductsList from "./getProductsList"
 import getProductsById from "./getProductsById";
+import createProduct from "./createProduct";
 
 export default {
-    hello, getProductsList, getProductsById
+    getProductsList, getProductsById, createProduct
 }

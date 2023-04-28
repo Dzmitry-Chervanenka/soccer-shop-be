@@ -6,17 +6,27 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "sls deploy",
-    "start": "npx sls invoke local -f getProductsById --path src/functions/getProductsById/mock-event.json"
+    "start": "npx sls invoke local -f createProduct --path src/functions/createProduct/mock-event.json",
+    "create-products-table": "bash src/scripts/create-products-table.txt",
+    "check-products-table": "bash src/scripts/describe-products-table.txt",
+    "create-stocks-table": "bash src/scripts/create-stocks-table.txt",
+    "check-stocks-table": "bash src/scripts/describe-stocks-table.txt",
+    "fill-products-table": "bash src/scripts/fill-products-table.txt",
+    "fill-stocks-table": "bash src/scripts/fill-stocks-table.txt"
   },
   "engines": {
     "node": ">=14.15.0"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.310.0",
     "@middy/core": "^3.4.0",
     "@middy/http-cors": "^4.2.8",
-    "@middy/http-json-body-parser": "^3.4.0"
+    "@middy/http-json-body-parser": "^3.4.0",
+    "aws-sdk": "^2.1354.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@aws-sdk/util-dynamodb": "^3.310.0",
     "@serverless/typescript": "^3.0.0",
     "@types/aws-lambda": "^8.10.71",
     "@types/node": "^14.14.25",
@@ -24,6 +34,7 @@
     "json-schema-to-ts": "^1.5.0",
     "serverless": "^3.0.0",
     "serverless-esbuild": "^1.23.3",
+    "serverless-iam-roles-per-function": "^3.2.0",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.1.3"

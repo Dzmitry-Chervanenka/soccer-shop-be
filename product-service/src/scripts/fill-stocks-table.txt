@@ -1,0 +1,26 @@
+aws dynamodb put-item \
+    --table-name stocks  \
+    --item \
+        '{"product_id": {"S": "1"}, "count": {"N": "17"}}'
+
+aws dynamodb put-item \
+    --table-name stocks  \
+    --item \
+         '{"product_id": {"S": "2"}, "count": {"N": "4"}}'
+
+
+aws dynamodb put-item \
+    --table-name stocks  \
+    --item \
+         '{"product_id": {"S": "3"}, "count": {"N": "0"}}'
+
+
+aws dynamodb put-item \
+    --table-name stocks  \
+    --item \
+         '{"product_id": {"S": "4"}, "count": {"N": "10"}}'
+
+aws dynamodb put-item \
+    --table-name stocks  \
+    --item \
+         '{"product_id": {"S": "5"}, "count": {"N": "15"}}'
