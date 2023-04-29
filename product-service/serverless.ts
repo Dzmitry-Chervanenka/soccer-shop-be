@@ -2,6 +2,7 @@ import type { AWS } from '@serverless/typescript';
 import getProductsList from "@functions/getProductsList";
 import getProductsById from "@functions/getProductsById";
 import createProduct from "@functions/createProduct";
+import catalogBatchProcess from "@functions/catalogBatchProcess";
 
 
 const serverlessConfiguration: AWS = {
@@ -39,7 +40,7 @@ const serverlessConfiguration: AWS = {
       STOCKS_TABLE_NAME: 'stocks'
     },
   },
-  functions: { getProductsList, getProductsById, createProduct },
+  functions: { getProductsList, getProductsById, createProduct, catalogBatchProcess },
   package: { individually: true },
   custom: {
     esbuild: {
