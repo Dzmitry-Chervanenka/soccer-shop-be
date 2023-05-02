@@ -29,6 +29,11 @@ const serverlessConfiguration: AWS = {
             Effect: "Allow",
             Action: ["dynamodb:Scan", "dynamodb:UpdateItem", "dynamodb:GetItem", "dynamodb:PutItem"],
             Resource: "arn:aws:dynamodb:eu-north-1:034402733310:table/stocks",
+          },
+          {
+            Effect: "Allow",
+            Action: ["sqs:*"],
+            Resource:"arn:aws:sqs:eu-north-1:034402733310:catalogItemsQueue"
           }
         ]
       }
@@ -39,6 +44,16 @@ const serverlessConfiguration: AWS = {
       PRODUCTS_TABLE_NAME: 'products',
       STOCKS_TABLE_NAME: 'stocks'
     },
+  },
+  resources:{
+    Resources:{
+      "NewSQSQueue":{
+        Type: "AWS::SQS::Queue",
+        Properties:{
+          QueueName: "catalogItemsQueue",
+        },
+      }
+    }
   },
   functions: { getProductsList, getProductsById, createProduct, catalogBatchProcess },
   package: { individually: true },
