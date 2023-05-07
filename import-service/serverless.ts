@@ -26,7 +26,20 @@ const serverlessConfiguration: AWS = {
             Effect: "Allow",
             Action: ["s3:*"],
             Resource: "arn:aws:s3:::soccer-shop-be-uploaded",
+          },
+          {
+            Effect: "Allow",
+            Action: ["sqs:*"],
+            Resource:"arn:aws:sqs:eu-north-1:034402733310:catalogItemsQueue"
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:SendMessage"
+            ],
+            "Resource": "arn:aws:lambda:eu-north-1:034402733310:function:import-service-dev-importFileParser"
           }
+
         ]
       }
     },
