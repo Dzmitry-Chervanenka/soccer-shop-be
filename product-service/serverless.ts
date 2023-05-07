@@ -17,6 +17,7 @@ const serverlessConfiguration: AWS = {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
     },
+    profile: "sandx",
     iam: {
       role: {
         statements: [
@@ -34,6 +35,11 @@ const serverlessConfiguration: AWS = {
             Effect: "Allow",
             Action: ["sqs:*"],
             Resource:"arn:aws:sqs:eu-north-1:034402733310:catalogItemsQueue"
+          },
+          {
+            Effect: "Allow",
+            Action: ["sns:*"],
+            Resource:"arn:aws:lambda:eu-north-1:034402733310:function:product-service-dev-catalogBatchProcess"
           }
         ]
       }
@@ -52,7 +58,24 @@ const serverlessConfiguration: AWS = {
         Properties:{
           QueueName: "catalogItemsQueue",
         },
+      },
+      "NewSNSTopic": {
+        Type: "AWS::SNS::Topic",
+        Properties: {
+          TopicName: "createProductTopic"
+        }
+      },
+      "SNSSubscription" : {
+        Type : "AWS::SNS::Subscription",
+        Properties : {
+          Endpoint: "Dzmitry_Chervanenka@Epam.com",
+          Protocol: "email",
+          TopicArn: {
+            "Fn::GetAtt": ["NewSNSTopic", "TopicArn"]
+          }
+        }
       }
+
     }
   },
   functions: { getProductsList, getProductsById, createProduct, catalogBatchProcess },
