@@ -17,6 +17,7 @@ export default {
         cors: {
           origin: '*'
         },
+        authorizer: "arn:aws:lambda:eu-north-1:034402733310:function:authorization-service-dev-basicAuthorizer"
       },
     },
   ],

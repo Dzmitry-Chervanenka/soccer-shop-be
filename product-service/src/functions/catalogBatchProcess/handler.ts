@@ -2,7 +2,7 @@ import middy from "@middy/core";
 import {SQSEvent} from "aws-lambda";
 import ProductService from "@functions/services/productService";
 import {PublishCommand, SNSClient} from "@aws-sdk/client-sns";
-import getCredentials from "../../../getCredentials";
+import getCredentials from "../../../../getCredentials";
 
 const catalogBatchProcess = async (event: SQSEvent) => {
     try {

@@ -5,9 +5,8 @@ import { HttpRequest } from "@aws-sdk/protocol-http";
 import { Hash } from "@aws-sdk/hash-node";
 import { parseUrl } from "@aws-sdk/url-parser";
 import { formatUrl } from "@aws-sdk/util-format-url";
-
 import {middyfy} from "@libs/lambda";
-import getCredentials from "../../../getCredentials";
+import getCredentials from "../../../../getCredentials";
 
 const importProductsFile: ValidatedEventAPIGatewayProxyEvent<unknown>  = async (event) => {
   try{

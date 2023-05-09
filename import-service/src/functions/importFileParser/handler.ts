@@ -1,7 +1,7 @@
 import {GetObjectCommand, S3Client} from "@aws-sdk/client-s3";
 import {SendMessageCommand, SQSClient} from "@aws-sdk/client-sqs";
 import {Readable} from "stream";
-import getCredentials from "../../../getCredentials";
+import getCredentials from "../../../../getCredentials";
 
 const csv = require('csv-parser');
 

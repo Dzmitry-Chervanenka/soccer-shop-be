@@ -27,6 +27,7 @@
     "@middy/http-cors": "^4.2.8",
     "@middy/http-json-body-parser": "^3.4.0",
     "aws-sdk": "^2.1354.0",
+    "serverless-dotenv-plugin": "^1.1.5",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
