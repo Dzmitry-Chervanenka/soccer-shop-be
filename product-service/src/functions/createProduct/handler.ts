@@ -1,23 +1,12 @@
 import { middyfy } from '@libs/lambda';
 
-import { v4 as uuid } from 'uuid';
 import {formatJSONResponse} from "@libs/api-gateway";
-import {DynamoDBClient, PutItemCommand, PutItemCommandOutput} from "@aws-sdk/client-dynamodb";
-import toProductDao from "@functions/createProduct/toProductDao";
+import {PutItemCommandOutput} from "@aws-sdk/client-dynamodb";
+import ProductService from "@functions/services/productService";
 
 const createProduct = async (event) => {
-        const data = JSON.parse(event.body || "{}");
-        const params = {
-            TableName: process.env.PRODUCTS_TABLE_NAME || "",
-            Item: toProductDao({
-                id: uuid(),
-                title: data.title || "",
-                price: data.price || "0",
-                description: data.description || ""
-            })
-        };
-    const client = new DynamoDBClient({});
-    const resp: PutItemCommandOutput = await client.send(new PutItemCommand(params))
+    const data = JSON.parse(event.body || "{}");
+    const resp: PutItemCommandOutput = await ProductService.getInstance().createProduct(data)
     return formatJSONResponse({product: resp})
 };
 

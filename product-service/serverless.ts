@@ -2,6 +2,7 @@ import type { AWS } from '@serverless/typescript';
 import getProductsList from "@functions/getProductsList";
 import getProductsById from "@functions/getProductsById";
 import createProduct from "@functions/createProduct";
+import catalogBatchProcess from "@functions/catalogBatchProcess";
 
 
 const serverlessConfiguration: AWS = {
@@ -16,6 +17,7 @@ const serverlessConfiguration: AWS = {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
     },
+    profile: "sandx",
     iam: {
       role: {
         statements: [
@@ -28,6 +30,16 @@ const serverlessConfiguration: AWS = {
             Effect: "Allow",
             Action: ["dynamodb:Scan", "dynamodb:UpdateItem", "dynamodb:GetItem", "dynamodb:PutItem"],
             Resource: "arn:aws:dynamodb:eu-north-1:034402733310:table/stocks",
+          },
+          {
+            Effect: "Allow",
+            Action: ["sqs:*"],
+            Resource:"arn:aws:sqs:eu-north-1:034402733310:catalogItemsQueue"
+          },
+          {
+            Effect: "Allow",
+            Action: ["sns:*"],
+            Resource:"arn:aws:lambda:eu-north-1:034402733310:function:product-service-dev-catalogBatchProcess"
           }
         ]
       }
@@ -39,7 +51,34 @@ const serverlessConfiguration: AWS = {
       STOCKS_TABLE_NAME: 'stocks'
     },
   },
-  functions: { getProductsList, getProductsById, createProduct },
+  resources:{
+    Resources:{
+      "NewSQSQueue":{
+        Type: "AWS::SQS::Queue",
+        Properties:{
+          QueueName: "catalogItemsQueue",
+        },
+      },
+      "NewSNSTopic": {
+        Type: "AWS::SNS::Topic",
+        Properties: {
+          TopicName: "createProductTopic"
+        }
+      },
+      "SNSSubscription" : {
+        Type : "AWS::SNS::Subscription",
+        Properties : {
+          Endpoint: "Dzmitry_Chervanenka@Epam.com",
+          Protocol: "email",
+          TopicArn: {
+            "Fn::GetAtt": ["NewSNSTopic", "TopicArn"]
+          }
+        }
+      }
+
+    }
+  },
+  functions: { getProductsList, getProductsById, createProduct, catalogBatchProcess },
   package: { individually: true },
   custom: {
     esbuild: {

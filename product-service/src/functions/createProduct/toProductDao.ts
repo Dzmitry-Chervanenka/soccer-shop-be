@@ -3,7 +3,8 @@ const toProductDao = (product) => {
         id: {S : product.id},
         title: {S: product.title},
         price: {N: product.price},
-        description: {S: product.description}
+        description: {S: product.description},
+        image: {S: product.image}
     }
 }
 

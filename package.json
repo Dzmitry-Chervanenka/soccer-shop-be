@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.1364.0",
     "serverless": "^3.29.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy" : "sls deploy",
-    "create" : "sls create --template aws-nodejs-typescript --path"
+    "deploy": "sls deploy",
+    "create": "sls create --template aws-nodejs-typescript --path"
   },
   "repository": {
     "type": "git",
