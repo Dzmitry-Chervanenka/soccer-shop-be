@@ -26,6 +26,7 @@ const importFileParser = async (event) => {
         const { Body } = getObjectResult;
         const asStream = (Body as Readable).pipe(csv());
         for await (const record of asStream) {
+            console.log(record)
             const resp = await sqs.send(
                 new SendMessageCommand({
                     QueueUrl: "https://sqs.eu-north-1.amazonaws.com/034402733310/catalogItemsQueue",

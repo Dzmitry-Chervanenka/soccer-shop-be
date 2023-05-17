@@ -9,6 +9,7 @@ const catalogBatchProcess = async (event: SQSEvent) => {
         const created = [];
         await Promise.all(
             event.Records.map((record) => {
+                console.log(record)
                 created.push(record)
                 return ProductService.getInstance().createProduct(JSON.parse(record.body))
             })

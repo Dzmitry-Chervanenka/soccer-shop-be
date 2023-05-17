@@ -20,7 +20,7 @@ class ProductService {
         return ProductService.instance;
     }
 
-    async createProduct(data: {title: string; price: string;description: string;}): Promise<PutItemCommandOutput> {
+    async createProduct(data: {title: string; price: string;description: string; image?:string;}): Promise<PutItemCommandOutput> {
         try {
             console.log(data.title)
             const params = {
@@ -29,7 +29,8 @@ class ProductService {
                     id: uuid(),
                     title: data.title || "",
                     price: data.price || "0",
-                    description: data.description || ""
+                    description: data.description || "",
+                    image: data.image || ""
                 })
             };
             console.log(params)

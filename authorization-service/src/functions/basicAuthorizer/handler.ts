@@ -9,8 +9,8 @@ export const basicAuthorizer = async (event) => {
     console.log(user)
     if (
         user &&
-        user.username === "DzmitryChervanenka" &&
-        user.password === process.env["DzmitryChervanenka"]
+        user.username === process.env.GITHUB_USERNAME &&
+        user.password === process.env[process.env.GITHUB_USERNAME]
     ) {
       effect = 'Allow';
     }
